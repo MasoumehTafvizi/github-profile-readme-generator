@@ -1,5 +1,4 @@
 from pathlib import Path
-from turtle import st
 
 def generate_readme_profile(theme, **kwargs):
     """ Generate GitHub profile README based on the selected theme and user info."""
