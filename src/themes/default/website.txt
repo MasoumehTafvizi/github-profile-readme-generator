@@ -1,2 +1,2 @@
 
-<a href="{ value }" target="blank"><img align="center" src="https://user-images.githubusercontent.com/88904952/234982196-562aea17-5532-4550-8c08-1c7cb994a541.png" alt="hashnode" height="50" width="50" /></a>
+<a href="{ value }" target="blank"><img align="center" src="https://github.com/user-attachments/assets/38888477-8edd-4bad-9832-f032d6ed129b" alt="hashnode" height="50" width="50" /></a>
