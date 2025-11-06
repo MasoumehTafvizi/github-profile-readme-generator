@@ -1,8 +1,9 @@
 from pathlib import Path
 
+
+
 def generate_readme_profile(theme, **kwargs):
     """ Generate GitHub profile README based on the selected theme and user info."""
-    
     # Readme theme profile
     with open(f"src/themes/{theme}/profile.txt") as f:
         profile = f.read()
@@ -11,8 +12,7 @@ def generate_readme_profile(theme, **kwargs):
     import re
     placeholders = re.findall(r'\{ (\w+) \}', profile)
         
-    # Replace placeholders with items
-    
+    # Replace placeholders with items 
     for placeholder in placeholders:
         for item, value in kwargs.items():
             if placeholder in kwargs:
@@ -25,8 +25,7 @@ def generate_readme_profile(theme, **kwargs):
                 item_path = Path(f"src/themes/{theme}/{item}.txt")
                 if not item_path.exists():
                     continue
-                
-                
+                                
                 print(f"{item}: {value}")
                 # Replace placeholders with item
                 with open(item_path) as f:
