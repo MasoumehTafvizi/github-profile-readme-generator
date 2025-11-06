@@ -97,7 +97,7 @@ if kwargs.get('github') or kwargs.get('linkedin') or kwargs.get('twitter') or kw
 st.header("🎨 Theme")
 themes = Path("src/themes").iterdir()
 themes = [theme.name for theme in themes]
-theme = st.selectbox("Select Theme:", [t.upper() for t in themes])
+theme = st.selectbox("Select Theme:", themes)
 
 
 # Generate README
