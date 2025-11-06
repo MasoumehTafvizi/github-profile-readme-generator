@@ -25,7 +25,7 @@ You can customize it and use it in your Github profile.
 - Then, go to **Code** tab to copy the code and paste it in your `README.md` file.
 
 You can also change the theme of the readme file by selecting a theme from the dropdown below.
-Themes are added by the community. If you want to add a theme, check out the [Github repo](https://github.com/hejazizo/github-profile-readme).
+Themes are added by the community. If you want to add a theme, check out the [Github repo](https://github.com/MasoumehTafvizi/github-profile-readme-generator).
 '''
 
 '''\n\n'''
