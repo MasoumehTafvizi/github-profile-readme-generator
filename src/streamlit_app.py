@@ -2,6 +2,8 @@ import streamlit as st
 from pathlib import Path
 
 from github_profile import generate_readme_profile
+from sections import (add_social_accounts, add_stats, add_personal_info,
+                           add_technical_skills, add_education, add_tech_stack)
 
 
 # Add project root to sys.path, so that we can import modules from src
@@ -9,89 +11,51 @@ from github_profile import generate_readme_profile
 # from the root directory.
 
 st.title("Github Profile :rainbow[README] Generator")
+st.sidebar.image('src/assets/logo.jpeg', width=300)
+st.sidebar.markdown('''
+:bulb: Built by [Masoumeh Tafvizi](https://github.com/MasoumehTafvizi).
+''')
+
+
+'''
+This app generates a Github profile readme file. To learn how to add a readme file to your Github profile, check out
+[this](https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-github-profile/customizing-your-profile/managing-your-profile-readme).
+You can customize it and use it in your Github profile.
+- First, fill out the forms below.
+- Then, go to **Code** tab to copy the code and paste it in your `README.md` file.
+
+You can also change the theme of the readme file by selecting a theme from the dropdown below.
+Themes are added by the community. If you want to add a theme, check out the [Github repo](https://github.com/hejazizo/github-profile-readme).
+'''
+
+'''\n\n'''
+st.header('Personalize your Readme')
+
+
+tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs([
+    ':bust_in_silhouette: Profile Info',
+    ':mortar_board: Education',
+    ':briefcase: Status',
+    ':computer: Technical Skills',
+    ':wrench: Tech Stack',
+    ':phone: Social Accounts'
+])
+
 kwargs = {}
-
-# Personal Info
-st.header("😎 Personal Info")
-with st.expander("Personal Info"):
-    col1, col2 = st.columns(2)
-    first_name = col1.text_input("First Name")
-    last_name = col2.text_input("Last Name")
-    kwargs['name'] = f"{first_name} {last_name}"
-    kwargs['gmail'] = st.text_input("Gmail")
-  
-
-# Education
-st.header(" 🎓 Education")
-with st.expander("Education"):
-    col1, col2 = st.columns(2)
-    kwargs['degree'] = col1.text_input("Degree")
-    kwargs['university_name'] = col2.text_input("University Name")
-    kwargs['university_city'] = col1.text_input("University City")
-    kwargs['university_country'] = col2.text_input("University Country")
-    kwargs['university_url'] = st.text_input("University Website URL", placeholder="https://www.university.edu")
-    if kwargs['university_url']:
-        kwargs['university_name_url'] = kwargs['university_name']
-        kwargs['university_name'] = ""
-    else:
-        kwargs['university_name_url'] = ""
+kwargs = add_personal_info(tab1, **kwargs)
+kwargs = add_education(tab2, **kwargs)
+kwargs = add_stats(tab3, **kwargs)
+kwargs = add_technical_skills(tab4, **kwargs)
+kwargs = add_tech_stack(tab5, **kwargs)
+kwargs = add_social_accounts(tab6, **kwargs)     
 
 
-# status
-st.header(" 💼 Current Status")
-with st.expander("Current Status"):
-    kwargs['learnings'] = st.text_area("What are you currently learning?")
-    
-    stats = {}
-    def display_input_row(index):
-        stats[index] = st.text_input(f"Status {index + 1}", key=index)
-        st.button('Remove', key=f'remove_{index}', on_click=decrease_rows, args=(index,))
-
-    if 'rows' not in st.session_state:
-        st.session_state['rows'] = 0
-
-    def increase_rows():
-        st.session_state['rows'] += 1
-    def decrease_rows(index):
-        st.session_state['rows'] -= 1
-        stats.pop(index)
-
-    st.button('Add more', on_click=increase_rows)
-
-    for i in range(st.session_state['rows']):
-        display_input_row(i)
-    
-  
-# Technical Skills
-st.header(" 💻 Technical Skills")
-with st.expander("Technical Skills"):
-    kwargs['skills'] = st.text_area("List your technical skills",placeholder="e.g. \n- Programming Languages: C, PYTHON, Java, JavaScript, HTML, CSS, Bash\n- Web Development: Flask, Django, React, Node.js\n- Databases: MySQL, PostgreSQL, MongoDB\n- Cloud Platforms: AWS, GCP, Azure",)
-    
-    
-# Tech Stack
-st.header(" 🔧 Tech Stack")
-with st.expander("Tech Stack"):
-    kwargs['tech_stack'] = st.text_area("List your tech stack (no big letters, separated by commas)", placeholder="javascript,vue,mysql")
-
-
-# Social Media
-st.header(" 📱 Social Media")
-with st.expander("Social Media"):
-    st.markdown("Enter your social media usernames (not links):")
-    col1, col2 = st.columns(2)
-    kwargs['github'] = col1.text_input("GitHub Username")
-    kwargs['linkedin'] = col2.text_input("LinkedIn Username")
-    kwargs['twitter'] = col1.text_input("Twitter Handle")
-    kwargs['facebook'] = col2.text_input("Facebook Username")
-    kwargs['instagram'] = col1.text_input("Instagram Handle")
-    kwargs['youtube'] = col2.text_input("YouTube Channel")
-    kwargs['website'] = col1.text_input("Website URL", placeholder="https://www.yourwebsite.com")
-    kwargs['discord'] = col2.text_input("Discord Username")
-
-if kwargs.get('github') or kwargs.get('linkedin') or kwargs.get('twitter') or kwargs.get('facebook') or kwargs.get('instagram') or kwargs.get('youtube') or kwargs.get('blog') or kwargs.get('discord') or kwargs.get('gmail'):
-    kwargs['social_media'] = "here are my social media links:\n"
-    
-    
+st.header('README.md Preview')
+'''
+- Select a theme from the dropdown below.
+- Go to **Code** tab to copy the code and paste it in your `README.md` file.
+- **Github extensions will not work in the preview.** You can only see them in the code and in your Github profile.
+'''
 
 # Select Theme
 st.header("🎨 Theme")
@@ -105,7 +69,10 @@ st.header("🚀 Generate README")
 generated = st.button("Generate")
 profile = generate_readme_profile( theme, **kwargs)
 if generated:
-    st.markdown("Copy the code below and paste it in your 'README.md' file")
-    st.code(profile)
-
-
+    tab1, tab2 = st.tabs(['Preview', 'Code'])
+    with tab1:
+        st.markdown('### Preview')
+        tab1.markdown(profile, unsafe_allow_html=True)
+    with tab2:
+        st.markdown('Copy the code below and paste it in your README.md file')
+        st.code(profile)
