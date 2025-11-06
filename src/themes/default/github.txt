@@ -1,0 +1,2 @@
+
+<a href="https://github.com/{ value }/" target="blank"><img align="center" src="https://skillicons.dev/icons?i=github" alt="linkedin" height="100" width="50" /></a>  

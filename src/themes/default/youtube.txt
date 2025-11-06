@@ -1,0 +1,2 @@
+
+<a href="https://www.youtube.com/@{ value }" target="blank"><img align="center" src="https://github.com/user-attachments/assets/bf2a5ab8-fff6-4559-ba2b-b9f62ab4a00e" alt="youtube" height="100" width="50" /></a> 

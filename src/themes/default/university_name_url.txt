@@ -1,0 +1,1 @@
+[@ { value }]({ university_url } "Located in { university_city }{ university_country }")

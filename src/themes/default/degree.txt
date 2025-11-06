@@ -1,0 +1,1 @@
+- 🎓 { value } { university_name }{ university_name_url }

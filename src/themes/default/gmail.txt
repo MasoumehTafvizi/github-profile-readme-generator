@@ -1,0 +1,2 @@
+
+<a href="mailto:{ value }" target="blank"><img align="center" src="https://skillicons.dev/icons?i=gmail" alt="gmail" height="100" width="50"/></a>
